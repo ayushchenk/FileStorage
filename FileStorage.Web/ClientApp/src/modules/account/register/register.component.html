@@ -1,0 +1,50 @@
+﻿<mat-card class="register">
+    <mat-card-header>
+        <mat-card-title>
+            <p>Register</p>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form #registerForm="ngForm" class="form-content" (ngSubmit)="submit()">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matNativeControl required email maxlength="64" [(ngModel)]="registerModel.email"
+                    placeholder="Enter email" #email="ngModel" name="email">
+                <mat-error *ngIf="email.errors?.required">Email is required</mat-error>
+                <mat-error *ngIf="email.errors?.email">You must enter a valid email</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Firstname</mat-label>
+                <input matNativeControl maxlength="32" [(ngModel)]="registerModel.firstname"
+                    placeholder="Enter firstname" #firstname="ngModel" name="firstname">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Lastname</mat-label>
+                <input matNativeControl maxlength="32" [(ngModel)]="registerModel.lastname" placeholder="Enter lastname"
+                    #lastname="ngModel" name="lastname">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" matNativeControl [(ngModel)]="registerModel.password" required maxlength="32"
+                    minlength="8" name="password" placeholder="Password" #password="ngModel">
+                <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
+                <mat-error *ngIf="password.errors?.minlength">Min length is 8 chars</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Conrirm password</mat-label>
+                <input type="password" matNativeControl [(ngModel)]="confirmPassword" required
+                    pattern="{{registerModel.password}}" maxlength="32" minlength="8" name="confirm"
+                    placeholder="Confirm password" #confirm="ngModel">
+                <mat-error *ngIf="confirm.errors?.required">Confirmation is required</mat-error>
+                <mat-error *ngIf="confirm.errors?.minlength">Min length is 8 chars</mat-error>
+                <mat-error *ngIf="confirm.errors?.pattern">Passwords don't match</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button type="submit" [disabled]="!registerForm.form.valid">Submit</button>
+        </form>
+    </mat-card-content>
+</mat-card>

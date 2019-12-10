@@ -1,0 +1,11 @@
+<div class="master-container">
+    <p>
+        Moving : "{{fileToMove.fileName}}"
+    </p>
+    <app-nav-folder [allFolders]="data.allFolders" [folders]="data.folders" [path]="data.path"
+        [currentFolder]="data.currentFolder"></app-nav-folder>
+    <footer class="button-container">
+        <button mat-raised-button class="btn btn-primary" (click)="cancel()">Cancel</button>
+        <button mat-raised-button class="btn btn-primary" [disabled]="disabled" (click)="move()">Move here</button>
+    </footer>
+</div>

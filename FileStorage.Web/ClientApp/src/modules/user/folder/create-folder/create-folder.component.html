@@ -1,0 +1,18 @@
+<div class="master-container">
+    <p>Create folder</p>
+
+    <form #createForm="ngForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Folder name</mat-label>
+            <input matNativeControl type="text" [(ngModel)]="folder.folderName" name="folderName"
+                placeholder="Folder name" required maxlength="64" #name="ngModel">
+            <mat-error *ngIf="name.errors?.required">Folder name is required</mat-error>
+        </mat-form-field>
+
+        <div>
+            <button mat-raised-button type="submit" (click)="submit()" [disabled]="!createForm.form.valid"
+                class="btn btn-primary">Submit</button>
+            <button mat-raised-button class="btn btn-primary" (click)="dialogRef.close()">Cancel</button>
+        </div>
+    </form>
+</div>

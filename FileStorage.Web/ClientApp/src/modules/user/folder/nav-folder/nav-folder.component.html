@@ -1,0 +1,17 @@
+<header>
+    <mat-card>
+        <div>
+            <button mat-button (click)="navRoot()">root /</button>
+            <button mat-button *ngFor="let folder of path" (click)="navFolder(folder)">{{folder.folderName}} /
+            </button>
+        </div>
+    </mat-card>
+</header>
+<main *ngIf="folders.length != 0">
+    <mat-nav-list>
+        <mat-list-item *ngFor="let folder of folders" (click)="navFolder(folder)">
+            <mat-icon mat-list-icon>folder</mat-icon>
+            <p mat-line>{{folder.folderName}}</p>
+        </mat-list-item>
+    </mat-nav-list>
+</main>

@@ -1,0 +1,16 @@
+<mat-toolbar>
+    <span class="app-title"><a routerLink="/user"> File storage </a></span>
+    <span class="filler"></span>
+    <div *ngIf="!isAuthenticated;else unset">
+        <a mat-raised-button routerLink="/register">Sign up</a>
+        <a mat-raised-button routerLink="/login">Login</a>
+    </div>
+    <ng-template #unset>
+        <span class="user-name"> Hello, {{tokenManager.get().email}}</span>
+        <button mat-raised-button (click)="logout()">Logout</button>
+    </ng-template>
+    <div *ngIf="isAdmin">
+        <a mat-raised-button routerLink="/admin">Admin panel</a>
+    </div>
+</mat-toolbar>
+<router-outlet></router-outlet>

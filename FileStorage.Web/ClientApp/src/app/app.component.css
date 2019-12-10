@@ -1,0 +1,13 @@
+span.app-title{
+    margin-left: 10px;
+}
+
+span.filler{
+    flex: 1 1 auto;
+}
+
+span.user-name{
+    font-size: 14px;
+    color: darkslategray;
+    margin-right: 10px;
+}

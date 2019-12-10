@@ -1,0 +1,10 @@
+.container{
+    margin: 40px;
+}
+
+mat-card{
+    width: 300px;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

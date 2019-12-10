@@ -1,0 +1,14 @@
+div.file-container{
+    background: white;
+    margin: 0;
+    width: 100%;
+    height: auto;
+}
+
+span{
+    margin: 5px;
+}
+
+span.column{
+    margin-right: 80px;
+}

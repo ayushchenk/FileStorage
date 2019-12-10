@@ -1,0 +1,11 @@
+div.master-container{
+    width: 500px;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+footer.button-container{
+    margin: 10px;
+    margin-left: 0px;
+}

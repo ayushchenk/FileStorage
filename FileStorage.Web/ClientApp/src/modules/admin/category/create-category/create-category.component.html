@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <p>Create category</p>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form #createForm="ngForm" (ngSubmit)="submit()">
+            <mat-form-field appearance="outline">
+                <mat-label>Category name</mat-label>
+                <input matNativeControl type="text" [(ngModel)]="category.categoryName" name="categoryName"
+                    placeholder="Category name" required maxlength="64" #name="ngModel">
+                <mat-error *ngIf="name.errors?.required">Category name is required</mat-error>
+            </mat-form-field>
+
+            <div>
+                <button mat-raised-button type="submit" [disabled]="!createForm.form.valid"
+                    class="btn btn-primary">Submit</button>
+                <a mat-raised-button class="btn btn-primary" routerLink="/admin/categories/">Cancel</a>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,10 @@
+div.master-container{
+    width: 300px;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.form-field{
+    margin: 5px;
+}

@@ -1,0 +1,40 @@
+<mat-card>
+    <div>
+        <button mat-button (click)="navRoot()">root /</button>
+        <button mat-button *ngFor="let folder of path" (click)="navFolder(folder)">{{folder.folderName}} / </button>
+    </div>
+</mat-card>
+<mat-card *ngIf="folders.length != 0">
+    <mat-nav-list class="list-horizontal">
+        <mat-list-item *ngFor="let folder of folders" (click)="navFolder(folder)"
+            (contextmenu)="onContextMenu($event, folder)">
+            <mat-icon mat-list-icon>folder</mat-icon>
+            <p mat-line> {{folder.folderName}} </p>
+        </mat-list-item>
+    </mat-nav-list>
+</mat-card>
+
+
+<div class="menu" [style.left]="contextMenuPosition.x" [style.top]="contextMenuPosition.y"
+    [matMenuTriggerFor]="contextMenu" (contextmenu)="disableContextMenu($event)">
+</div>
+<mat-menu #contextMenu="matMenu" (contextmenu)="disableContextMenu($event)">
+    <ng-template matMenuContent let-folder="folder">
+        <button mat-menu-item (click)="downloadFolder(folder)">
+            <mat-icon>get_app</mat-icon>
+            <span>Download</span>
+        </button>
+        <button mat-menu-item (click)="moveFolder(folder)">
+            <mat-icon>arrow_forward</mat-icon>
+            <span>Move</span>
+        </button>
+        <button mat-menu-item (click)="editFolder(folder)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+        </button>
+        <button mat-menu-item (click)="deleteFolder(folder)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+        </button>
+    </ng-template>
+</mat-menu>
