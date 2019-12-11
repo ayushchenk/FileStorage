@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { TokenManager } from 'src/modules/account/service/token-manager';
+import { TokenManager } from 'src/app/modules/account/service/token-manager';
 import { Router } from '@angular/router';
 
 @Component({

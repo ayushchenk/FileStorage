@@ -1,0 +1,18 @@
+div.file-container{
+    background: white;
+    margin: 0;
+    width: 100%;
+    height: auto;
+}
+
+span{
+    margin: 5px;
+}
+/* 
+.icon-display {
+    transform: scale(1);
+ } */
+
+div.tile-content{
+    justify-content: start;
+}

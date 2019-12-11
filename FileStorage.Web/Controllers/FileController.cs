@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -46,6 +48,22 @@ namespace FileStorage.Web.Controllers
                 return NotFound();
             Stream stream = new FileStream(path: item.Path, mode: FileMode.Open);
             return File(stream, "application/octet-stream");
+        }
+
+        [HttpPost("stream")]
+        public IActionResult GetStream([FromBody] Guid[] ids)
+        {
+            string path = @$"Files\tempo\{Guid.NewGuid().ToString()}.zip";
+            using (var zip = ZipFile.Open(path, ZipArchiveMode.Create))
+            {
+                foreach (var id in ids)
+                {
+                    var item = fileService.Find(id);
+                    if (item != null)
+                        zip.CreateEntryFromFile(item.Path, item.FileName, CompressionLevel.Optimal);
+                }
+            }
+            return File(new FileStream(path: path, mode: FileMode.Open), "application/octet-stream");
         }
 
         [HttpPost]
@@ -107,6 +125,22 @@ namespace FileStorage.Web.Controllers
                 return Ok();
             }
             return NotFound();
+        }
+
+        [HttpPost("delete")]
+        public async Task<IActionResult> Delete([FromBody] Guid[] ids)
+        {
+            foreach (var id in ids)
+            {
+                var file = await fileService.FindAsync(id);
+                if (file != null)
+                {
+                    ioService.DeleteFile(file);
+                    await fileService.RemoveAsync(id);
+                }
+            }
+            await fileService.SaveAsync();
+            return Ok();
         }
     }
 }
