@@ -62,6 +62,7 @@ namespace FileStorage.Web.Infrastructure
         public void RenameFolder(FolderDTO value, FolderDTO origin)
         {
             Directory.Move(Path.Combine(Directory.GetCurrentDirectory(), origin.FullPath), Path.Combine(Directory.GetCurrentDirectory(), origin.ParentPath + "\\" + value.FolderName));
+            
         }
 
         public void MoveFile(FileDTO value, FolderDTO parent)

@@ -8,33 +8,34 @@ import { MaterialModule } from './material.module';
 import { AdminModule } from 'src/app/modules/admin/admin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LogErrorHandler } from './infrastructure/log-error-handler';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { HttpErrorInterceptor } from './infrastructure/http-error.interceptor';
 import { UserModule } from 'src/app/modules/user/user.module';
-
+import { HttpModule } from '@angular/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    AccountModule,
-    MaterialModule,
-    AdminModule,
-    UserModule,
-    AppRoutingModule,
-  ],
-  // providers: [
-  //   { provide: ErrorHandler, useClass: LogErrorHandler },
-  //   {
-  //     provide: HTTP_INTERCEPTORS,
-  //     useClass: HttpErrorInterceptor,
-  //     multi: true,
-  //   }
-  // ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        AccountModule,
+        MaterialModule,
+        AdminModule,
+        UserModule,
+        AppRoutingModule,
+        HttpModule
+    ],
+    // providers: [
+    //   { provide: ErrorHandler, useClass: LogErrorHandler },
+    //   {
+    //     provide: HTTP_INTERCEPTORS,
+    //     useClass: HttpErrorInterceptor,
+    //     multi: true,
+    //   }
+    // ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

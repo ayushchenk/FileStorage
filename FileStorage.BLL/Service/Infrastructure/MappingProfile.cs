@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FileStorage.BLL.Model;
 using FileStorage.DAL.Model;
+using System;
 
 namespace FileStorage.BLL.Service.Infrastructure
 {
@@ -9,7 +10,10 @@ namespace FileStorage.BLL.Service.Infrastructure
         public MappingProfile()
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();
-            CreateMap<Folder, FolderDTO>().ReverseMap();
+
+            CreateMap<Folder, FolderDTO>();
+            CreateMap<FolderDTO, Folder>()
+                .ForMember("ParentFolderId", options => options.MapFrom(folder => folder.ParentFolderId == Guid.Empty ? null : folder.ParentFolderId));
 
             CreateMap<File, FileDTO>()
                 .ForMember("FirstName", options => options.MapFrom(file => file.User.FirstName))

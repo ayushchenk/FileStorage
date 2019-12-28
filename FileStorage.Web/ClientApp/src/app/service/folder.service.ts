@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Folder } from '../model/folder';
 import { TokenManager } from 'src/app/modules/account/service/token-manager';
 import { Observable } from 'rxjs';
+import { Guid } from 'guid-typescript';
 
 @Injectable()
 export class FolderService {
@@ -19,6 +20,9 @@ export class FolderService {
     }
 
     post(folder: Folder): Observable<HttpResponse<string>> {
+        if(folder.id == null){
+            folder.id = Guid.EMPTY;
+        }
         return this.httpClient.post<string>(this.url, folder, { headers: this.tokenManager.getHeaders(), observe: "response" });
     }
 

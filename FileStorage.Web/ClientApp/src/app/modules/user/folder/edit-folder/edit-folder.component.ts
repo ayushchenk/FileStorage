@@ -10,17 +10,18 @@ import { Folder } from 'src/app/model/folder';
     styleUrls: ['./edit-folder.component.css'],
 })
 export class EditFolderComponent implements OnInit {
-    private folder: Folder = new Folder("", "", "");
-    private originName : string;
+    private folder: Folder;
+    private originName: string;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialogRef: MatDialogRef<EditFolderComponent>,
         private folderService: FolderService,
-    ) { }
+    ) {
+        this.folder = this.data;
+    }
 
     ngOnInit() {
-        this.folder = this.data;
         this.originName = this.folder.folderName;
     }
 
@@ -29,7 +30,7 @@ export class EditFolderComponent implements OnInit {
         this.dialogRef.close()
     }
 
-    cancel(){
+    cancel() {
         this.folder.folderName = this.originName;
         this.dialogRef.close();
     }

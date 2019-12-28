@@ -1,8 +1,8 @@
+import { Guid } from 'guid-typescript';
+
 export class Folder {
-    constructor(
-        public id: string,
-        public folderName: string,
-        public userId: string,
-        public parentFolderId?: string
-    ) { }
+    public id: string = null;
+    public folderName: string;
+    public userId: string;
+    public parentFolderId;
 }

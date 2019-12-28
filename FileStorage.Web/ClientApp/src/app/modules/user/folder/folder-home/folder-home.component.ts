@@ -19,7 +19,8 @@ import { Folder } from 'src/app/model/folder';
 })
 export class FolderHomeComponent implements OnInit {
     private displayedColumns = ['folderName', 'actions'];
-    private currentFolder: Folder = new Folder(null, "", null, null);
+    // private currentFolder: Folder = new Folder(null, "", null, null);
+    private currentFolder: Folder = new Folder();
     private allFolders: Folder[] = [];
     private folders: Folder[] = [];
     private path: Folder[] = [];
@@ -132,7 +133,7 @@ export class FolderHomeComponent implements OnInit {
         while (this.path.length != 0) {
             this.path.pop();
         }
-        this.currentFolder = new Folder(null, "", null, null);
+        this.currentFolder = new Folder();
         this.currentFolderEvent.emit(this.currentFolder);
         this.allFolders = data;
         this.folders = this.allFolders.filter(f => f.parentFolderId == null);

@@ -14,7 +14,11 @@ export class FileService {
         private tokenManager: TokenManager,
     ) { }
 
-    download(id: string): Observable<Blob> {
+    download(id: string): Observable<HttpResponse<Blob>> {
+        return this.httpClient.get(this.url + "/download/" + id, { responseType: 'blob', observe: 'response' });
+    }
+
+    stream(id: string): Observable<Blob> {
         return this.httpClient.get(this.url + "/stream/" + id, { headers: this.tokenManager.getHeaders(), responseType: 'blob', observe: 'body' });
     }
 

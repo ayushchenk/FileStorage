@@ -12,6 +12,8 @@ import { MoveFileComponent } from '../move-file/move-file.component';
 import { Folder } from 'src/app/model/folder';
 import { Category } from 'src/app/model/category';
 import { FileModel } from 'src/app/model/file';
+import { FileDetector } from 'protractor';
+import { Guid } from 'guid-typescript';
 // import 'rxjs/Rx' ;
 
 @Component({
@@ -21,7 +23,7 @@ import { FileModel } from 'src/app/model/file';
 })
 export class FileHomeComponent implements OnInit {
     // private displayedColumns = ['fileName', 'categoryName'];
-    private currentFolder: Folder = new Folder(null, "", null, null);
+    private currentFolder: Folder = new Folder();
     private categories: Category[];
     private files: FileModel[] = [];
     private allFiles: FileModel[] = [];
@@ -42,7 +44,7 @@ export class FileHomeComponent implements OnInit {
         this.categoryService.getAll().subscribe(data => this.categories = data);
         this.fileService.getAll().subscribe(data => {
             this.allFiles = data;
-            this.files = this.allFiles.filter(file => file.folderId == null);
+            this.files = data.filter(file => file.folderId == null);
         });
     }
 
@@ -70,17 +72,15 @@ export class FileHomeComponent implements OnInit {
     }
 
     openFile(file: FileModel) {
-        console.log("begin");
-        this.fileService.download(file.id).subscribe(data => {
+        this.fileService.stream(file.id).subscribe(data => {
             const blob = new Blob([data], { type: 'application/octet-stream' });
             const url = window.URL.createObjectURL(blob);
-            console.log(url);
             window.open(url);
         });
     }
 
     downloadFile(file: FileModel) {
-        this.fileService.download(file.id).subscribe(data => {
+        this.fileService.stream(file.id).subscribe(data => {
             const blob = new Blob([data], { type: 'application/octet-stream' });
             saveAs(blob, file.fileName);
         });

@@ -11,7 +11,7 @@ import { Category } from 'src/app/model/category';
     providers: [CategoryService],
 })
 export class EditCategoryComponent implements OnInit {
-    category: Category = new Category(Guid.EMPTY, "");
+    category: Category = new Category();
 
     constructor(
         private categoryService: CategoryService,

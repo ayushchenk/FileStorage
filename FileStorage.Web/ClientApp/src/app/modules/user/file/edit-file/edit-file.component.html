@@ -2,15 +2,30 @@
     <p>Edit file</p>
 
     <form #editForm="ngForm">
-        <mat-form-field appearance="outline">
+        <mat-form-field>
             <mat-label>File name</mat-label>
-            <input matNativeControl type="text" [(ngModel)]="file.fileName" name="fileName"
-                placeholder="File name" required maxlength="64" #name="ngModel">
+            <input matNativeControl type="text" [(ngModel)]="file.fileName" name="fileName" required maxlength="64"
+                #name="ngModel">
             <mat-error *ngIf="name.errors?.required">File name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Accessibility</mat-label>
+            <mat-select required #access="ngModel" [value]="file.fileAccessibility" [(ngModel)]="file.fileAccessibility"
+                name="accessibility">
+                <mat-option *ngFor="let type of accessibility" [value]="type.value">
+                    {{type.display}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="access.errors?.required">Accessibility is required</mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="file.fileAccessibility === 1">
+            <mat-label>Access link</mat-label>
+            <input matNativeControl type="text" (click)="$event.target.select()" [(ngModel)]="file.shortLink" readonly name="link">
         </mat-form-field>
         <div>
             <button mat-raised-button type="submit" (click)="submit()"
-                [disabled]="name.pristine || !editForm.form.valid" class="btn btn-primary">Submit</button>
+                [disabled]="access.pristine && (name.pristine || !editForm.form.valid)"
+                class="btn btn-primary">Submit</button>
             <button mat-raised-button class="btn btn-primary" (click)="cancel()">Cancel</button>
         </div>
     </form>

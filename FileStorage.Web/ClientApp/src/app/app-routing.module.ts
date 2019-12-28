@@ -11,6 +11,7 @@ import { UserGuardService } from 'src/app/modules/account/service/user-guard.ser
 import { FileHomeComponent } from 'src/app/modules/user/file/file-home/file-home.component';
 import { TokenManager } from 'src/app/modules/account/service/token-manager';
 import { RegisterComponent } from 'src/app/modules/account/register/register.component';
+import { DownloadFileComponent } from './modules/user/file/download-file/download-file.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
       }
     ]
   },
+  { path: 'd/:id', component: DownloadFileComponent },
   { path: '**', redirectTo: 'user/files' },
 ];
 

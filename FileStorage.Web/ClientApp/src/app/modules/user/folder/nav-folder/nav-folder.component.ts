@@ -46,7 +46,7 @@ export class NavFolderComponent implements OnInit {
         while (this.path.length != 0) {
             this.path.pop();
         }
-        this.currentFolder = new Folder(null, "", null, null);
+        this.currentFolder = new Folder();
         this.folders = this.allFolders.filter(f => f.parentFolderId == null);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using FileStorage.BLL.Model;
@@ -17,7 +18,7 @@ namespace FileStorage.Web.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "User")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "User")]
     public class FileController : ControllerBase
     {
         private readonly IEntityService<FileDTO> fileService;
@@ -38,6 +39,29 @@ namespace FileStorage.Web.Controllers
             if (item == null)
                 return NotFound();
             return Ok(item);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{id}/url")]
+        public async Task<IActionResult> GetUrl(Guid id)
+        {
+            string url = "https://tinyurl.com/api-create.php?url=https://localhost:44304/d/" + id;
+            HttpClient client = new HttpClient();
+            return Ok(await client.GetStringAsync(url));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("download/{id}")]
+        public async Task<IActionResult> Download(Guid id)
+        {
+            var item = await fileService.FindAsync(id);
+            if (item == null)
+                return NotFound();
+            if (item.FileAccessibility == DAL.Model.FileAccessibility.Private)
+                return BadRequest("Private file");
+            Stream stream = new FileStream(path: item.Path, mode: FileMode.Open);
+            HttpContext.Response.Headers.Add("filename", item.FileName);
+            return File(stream, "application/octet-stream");
         }
 
         [HttpGet("stream/{id}")]

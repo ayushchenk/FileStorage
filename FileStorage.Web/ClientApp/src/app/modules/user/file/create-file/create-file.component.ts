@@ -13,7 +13,7 @@ import { Category } from 'src/app/model/category';
     styleUrls: ['./create-file.component.css']
 })
 export class CreateFileComponent implements OnInit {
-    private fileDTO: FileModel = new FileModel(Guid.EMPTY, null, FileAccessibility.Private, this.tokenManager.get().userId, null, null, null, null);
+    private fileDTO: FileModel = new FileModel();
     private file: File;
     private categories: Category[];
 
@@ -26,6 +26,7 @@ export class CreateFileComponent implements OnInit {
 
     ngOnInit() {
         this.categories = this.data.categories;
+        this.fileDTO.userId = this.tokenManager.get().userId;
         this.fileDTO.folderId = this.data.folderId;
         if (this.fileDTO.folderId == null) {
             this.fileDTO.folderId = Guid.EMPTY;

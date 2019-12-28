@@ -16,6 +16,8 @@ import { EditFileComponent } from './file/edit-file/edit-file.component';
 import { MoveFolderComponent } from './folder/move-folder/move-folder.component';
 import { NavFolderComponent } from './folder/nav-folder/nav-folder.component';
 import { MoveFileComponent } from './file/move-file/move-file.component';
+import { DownloadFileComponent } from './file/download-file/download-file.component';
+import { UrlService } from 'src/app/service/url.service';
 
 @NgModule({
     imports: [
@@ -35,6 +37,7 @@ import { MoveFileComponent } from './file/move-file/move-file.component';
         MoveFolderComponent,
         NavFolderComponent,
         MoveFileComponent,
+        DownloadFileComponent,
     ],
     exports: [
         UserComponent,
@@ -60,7 +63,8 @@ import { MoveFileComponent } from './file/move-file/move-file.component';
     providers:[
         FolderService,
         FileService,
-        CategoryService
+        CategoryService,
+        UrlService,
     ]
 })
 export class UserModule { }
