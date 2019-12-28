@@ -1,2 +1,1 @@
 # FileStorage
-EPAM FileStorage Project
