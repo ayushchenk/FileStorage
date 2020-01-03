@@ -2,7 +2,7 @@
     <p>Upload file</p>
     <form #createForm="ngForm">
         <div class="form-field">
-            <input type="file" placeholder="File" required (change)="handleFileInput($event.target.files)">
+            <input type='file' placeholder="File" required (change)="handleFileInput($event.target.files)">
         </div>
 
         <mat-form-field>
@@ -12,7 +12,6 @@
                     {{category.categoryName}}
                 </mat-option>
             </mat-select>
-            <!-- <mat-error *ngIf="selCat.errors?.required">Category is required</mat-error> -->
         </mat-form-field>
 
         <div>

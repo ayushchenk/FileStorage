@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using FileStorage.Web.Infrastructure;
 
 namespace FileStorage.Web.Controllers
 {
@@ -26,16 +28,7 @@ namespace FileStorage.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(userManager.Users);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
-        {
-            var item = await userManager.FindByIdAsync(id.ToString());
-            if (item == null)
-                return NotFound();
-            return Ok(item);
+            return Ok(userManager.Users.ToList().Select(user => new UserDTO(user, userManager.GetRolesAsync(user).Result)));
         }
 
         [HttpDelete("{id}")]

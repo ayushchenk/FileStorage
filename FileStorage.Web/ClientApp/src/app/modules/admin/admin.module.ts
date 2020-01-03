@@ -7,6 +7,8 @@ import { AdminComponent } from './admin.component';
 import { CreateCategoryComponent } from './category/create-category/create-category.component';
 import { CategoryHomeComponent } from './category/category-home/category-home.component';
 import { EditCategoryComponent } from './category/edit-category/edit-category.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserService } from 'src/app/service/user.service';
 
 @NgModule({
     imports: [
@@ -19,13 +21,16 @@ import { EditCategoryComponent } from './category/edit-category/edit-category.co
         AdminComponent,
         CreateCategoryComponent,
         CategoryHomeComponent,
-        EditCategoryComponent
+        EditCategoryComponent,
+        UserListComponent
     ],
     exports: [
         AdminComponent,
         CreateCategoryComponent,
         CategoryHomeComponent,
-        EditCategoryComponent
-    ]
+        EditCategoryComponent,
+        UserListComponent
+    ],
+    providers : [UserService]
 })
 export class AdminModule { }

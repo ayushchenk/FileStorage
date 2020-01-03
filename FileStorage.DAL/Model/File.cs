@@ -6,11 +6,11 @@ using System.Text;
 
 namespace FileStorage.DAL.Model
 {
-    public partial class File
+    public partial class File : IEntity<Guid>
     {
         public Guid Id { set; get; }
 
-        //public string Path { set; get; }
+        public string Path { set; get; }
 
         public string FileName { set; get; }
 
@@ -30,17 +30,6 @@ namespace FileStorage.DAL.Model
 
         public virtual Category Category { set; get; }
 
-        //public string Path 
-        //{
-        //    get
-        //    {
-        //        if(Folder != null)
-        //            return Folder.FullPath + "\\" + FileName;
-        //        return $@"Files\{UserId}\{FileName}";
-        //    }
-        //}
-
-        public string Path { set; get; }
     }
 
     public enum FileAccessibility

@@ -25,12 +25,4 @@ export class AccountService {
     login(model: LoginModel) {
         return this.httpClient.post<TokenWrap>(this.url + "login", model, { observe: 'body' });
     }
-
-    makeAdmin(model: ChangeRoleModel) {
-        this.httpClient.post(this.url + "MakeAdmin", model).subscribe();
-    }
-
-    makeUser(model: ChangeRoleModel) {
-        this.httpClient.post(this.url + "makeUser", model).subscribe();
-    }
 }

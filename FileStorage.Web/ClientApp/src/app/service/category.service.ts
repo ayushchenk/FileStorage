@@ -26,7 +26,7 @@ export class CategoryService {
     }
 
     getAll(): Observable<Category[]> {
-        return this.httpClient.get<Category[]>(this.url, { headers: this.tokenManager.getHeaders(), observe: 'body' });
+        return this.httpClient.get<Category[]>(this.url, { observe: 'body' });
     }
 
     delete(id: string): Observable<HttpResponse<any>> {

@@ -55,6 +55,10 @@ export class FileService {
         return this.httpClient.get<FileModel[]>(this.getAllUrl + "/" + this.tokenManager.get().userId, { headers: this.tokenManager.getHeaders(), observe: 'body' });
     }
 
+    search(category : string, key : string): Observable<FileModel[]> {
+        return this.httpClient.get<FileModel[]>(this.url + `/search/${category}/${key}`, {  observe: 'body' });
+    }
+
     delete(id: string): Observable<HttpResponse<any>> {
         return this.httpClient.delete(this.url + "/" + id, { headers: this.tokenManager.getHeaders(), observe: "response" });
     }

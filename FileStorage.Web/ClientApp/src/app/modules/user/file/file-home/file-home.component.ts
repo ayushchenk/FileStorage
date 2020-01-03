@@ -6,15 +6,11 @@ import { MatDialog, throwMatDialogContentAlreadyAttachedError } from '@angular/m
 import { CreateFileComponent } from '../create-file/create-file.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { EditFileComponent } from '../edit-file/edit-file.component';
-import * as JSZip from 'jszip';
 import { saveAs, encodeBase64 } from '@progress/kendo-file-saver';
 import { MoveFileComponent } from '../move-file/move-file.component';
 import { Folder } from 'src/app/model/folder';
 import { Category } from 'src/app/model/category';
 import { FileModel } from 'src/app/model/file';
-import { FileDetector } from 'protractor';
-import { Guid } from 'guid-typescript';
-// import 'rxjs/Rx' ;
 
 @Component({
     selector: 'file-home',

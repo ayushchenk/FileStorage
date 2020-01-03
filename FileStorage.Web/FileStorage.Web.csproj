@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="FIles\" />
+    <Folder Include="Files\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

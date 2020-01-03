@@ -80,7 +80,6 @@ namespace FileStorage.Web.Controllers
 
         [HttpPost]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
-
         public async Task<object> MakeAdmin([FromBody] ChangeRoleModel model)
         {
             if (!ModelState.IsValid)
@@ -102,7 +101,6 @@ namespace FileStorage.Web.Controllers
 
         [HttpPost]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
-
         public async Task<object> MakeUser([FromBody] ChangeRoleModel model)
         {
             if (!ModelState.IsValid)

@@ -12,10 +12,13 @@ import { FileHomeComponent } from 'src/app/modules/user/file/file-home/file-home
 import { TokenManager } from 'src/app/modules/account/service/token-manager';
 import { RegisterComponent } from 'src/app/modules/account/register/register.component';
 import { DownloadFileComponent } from './modules/user/file/download-file/download-file.component';
+import { UserListComponent } from './modules/admin/user/user-list/user-list.component';
+import { SearchComponent } from './modules/user/search/search/search.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'search', component: SearchComponent },
   {
     path: 'admin', component: AdminComponent, canActivate: [AdminGuardService], children: [
       {
@@ -23,7 +26,8 @@ const routes: Routes = [
           { path: 'create', component: CreateCategoryComponent, canActivate: [AdminGuardService], },
           { path: 'edit/:id', component: EditCategoryComponent, canActivate: [AdminGuardService], },
         ]
-      }
+      },
+      { path: 'users', component: UserListComponent, canActivate: [AdminGuardService] },
     ]
   },
   {
@@ -35,12 +39,12 @@ const routes: Routes = [
     ]
   },
   { path: 'd/:id', component: DownloadFileComponent },
-  { path: '**', redirectTo: 'user/files' },
+  { path: '**', redirectTo: 'search' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    onSameUrlNavigation: 'reload'
+    // onSameUrlNavigation: 'reload'
   })],
   exports: [RouterModule],
   providers: [TokenManager, AdminGuardService, UserGuardService]

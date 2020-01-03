@@ -22,7 +22,7 @@ namespace FileStorage.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "User")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             var items = await categoryService.GetAllAsync();

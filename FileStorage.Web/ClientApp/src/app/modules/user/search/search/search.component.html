@@ -1,0 +1,37 @@
+<mat-card class="container">
+    <div>
+        <mat-form-field class="select-container">
+            <mat-label>Category</mat-label>
+            <mat-select required #access="ngModel" [(ngModel)]="selectedCategory" name="accessibility">
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                    {{category.categoryName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="access.errors?.required">Category is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-container">
+            <mat-label>File name</mat-label>
+            <input matNativeControl type="text" name="fileName" clsss="file-input" [(ngModel)]="fileName" maxlength="64"
+                #name="ngModel">
+        </mat-form-field>
+        <button mat-raised-button (click)="search()" [disabled]="selectedCategory == null"> Search </button>
+    </div>
+</mat-card>
+<table *ngIf="files.length != 0" mat-table [dataSource]="files" class="mat-elevation-z8 table">
+    <ng-container matColumnDef="fileName">
+        <th mat-header-cell *matHeaderCellDef> File </th>
+        <td mat-cell *matCellDef="let element"> 
+            {{element.fileName}} 
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell class="mat-cell-buttons" *matCellDef="let element">
+            <mat-icon class="outline-button" (click)="download(element)">get_app</mat-icon>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

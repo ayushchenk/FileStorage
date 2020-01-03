@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using FileStorage.BLL.Model;
 using FileStorage.BLL.Service.Infrastructure;
+using FileStorage.DAL.Model;
 using FileStorage.DAL.UnitOfWorks;
 using FileStorage.Web.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,6 +32,26 @@ namespace FileStorage.Web.Controllers
             this.folderService = folderService;
             this.ioService = new IOService();
         }
+
+        [AllowAnonymous]
+        [HttpGet("public")]
+        public async Task<IActionResult> GetPublic()
+        {
+            return Ok(await fileService.FindByAsync(file => file.FileAccessibility == FileAccessibility.Public));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("search/{category}/{key}")]
+        public async Task<IActionResult> Search(string category, string key)
+        {
+            key = key.ToLower();
+            var query = await fileService.FindByAsync(file => file.FileAccessibility == FileAccessibility.Public
+                && file.CategoryId.ToString() == category);
+            if (key != "undefined")
+                query = query.Where(file => file.FileName.ToLower().Contains(key));
+            return Ok(query);
+        }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
@@ -57,7 +78,7 @@ namespace FileStorage.Web.Controllers
             var item = await fileService.FindAsync(id);
             if (item == null)
                 return NotFound();
-            if (item.FileAccessibility == DAL.Model.FileAccessibility.Private)
+            if (item.FileAccessibility == FileAccessibility.Private)
                 return BadRequest("Private file");
             Stream stream = new FileStream(path: item.Path, mode: FileMode.Open);
             HttpContext.Response.Headers.Add("filename", item.FileName);

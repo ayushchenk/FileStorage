@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FileStorage.DAL.Model
 {
-    public partial class Category
+    public partial class Category : IEntity<Guid>
     {
         public Guid Id { set; get; }
 

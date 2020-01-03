@@ -7,7 +7,7 @@ using System.Text;
 
 namespace FileStorage.DAL.Model
 {
-    public partial class Folder
+    public partial class Folder : IEntity<Guid>
     {
         public Guid Id { set; get; }
 

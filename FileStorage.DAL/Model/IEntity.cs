@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FileStorage.DAL.ModelExt
+namespace FileStorage.DAL.Model
 {
     public interface IEntity<T>
     {
