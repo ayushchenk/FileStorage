@@ -1,0 +1,12 @@
+button.role{
+    width: 110px;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+    background-color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 5px;
+}

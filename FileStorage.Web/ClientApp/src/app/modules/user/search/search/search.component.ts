@@ -5,6 +5,8 @@ import { CategoryService } from 'src/app/service/category.service';
 import { Category } from 'src/app/model/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { saveAs } from '@progress/kendo-file-saver';
+import { error } from 'util';
+import { UseExistingWebDriver } from 'protractor/built/driverProviders';
 
 @Component({
     selector: 'app-search',
@@ -32,18 +34,27 @@ export class SearchComponent implements OnInit {
 
     search() {
         this.files = [];
+        if(this.fileName == ""){
+            this.fileName = undefined;
+        }
         this.fileService.search(this.selectedCategory, this.fileName).subscribe(data => {
             this.files = data;
-            if(this.files.length == 0){
+            if (this.files.length == 0) {
                 this.snackBar.open("No files found", "OK", { duration: 3500 });
             }
         });
     }
 
-    download(file: FileModel){
-        this.fileService.stream(file.id).subscribe(data => {
-            const blob = new Blob([data], { type: 'application/octet-stream' });
-            saveAs(blob, file.fileName);
-        }); 
+    download(file: FileModel) {
+        this.fileService.download(file.id).subscribe(
+            response => {
+                if (response.ok) {
+                    const blob = new Blob([response.body], { type: 'application/octet-stream' });
+                    saveAs(blob, file.fileName);
+                }
+            }, 
+            error =>
+                this.snackBar.open("Error loading file", "OK", { duration: 3500 })
+        );
     }
 }

@@ -79,7 +79,6 @@ namespace FileStorage.BLL.Service
                 return false;
             unitOfWork.BeginTransaction();
             DeleteRecursive(folder);
-            //folderRepositoty.Remove(folder.Id);
             unitOfWork.Commit();
             return true;
         }
@@ -128,7 +127,6 @@ namespace FileStorage.BLL.Service
             var subFolders = folderRepositoty.FindBy(f => f.ParentFolderId == folder.Id).ToList();
             foreach (var sub in subFolders)
             {
-                //folderRepositoty.Remove(sub.Id);
                 DeleteRecursive(sub);
             }
         }

@@ -1,7 +1,10 @@
 <router-outlet></router-outlet>
 
 <mat-card>
-    <a mat-button routerLink="/admin/categories/create">Add new category</a>
+    <a mat-button routerLink="/admin/categories/create">
+        <mat-icon>add_circle_outline</mat-icon>
+        Add new category
+    </a>
 </mat-card>
 <table mat-table [dataSource]="categories" class="mat-elevation-z8">
     <ng-container matColumnDef="categoryName">
@@ -17,7 +20,7 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell class="mat-cell-buttons" *matCellDef="let element">
-            <button mat-button >
+            <button mat-button>
                 <mat-icon (click)="delete(element)">delete</mat-icon> Delete
             </button>
             <a mat-button [routerLink]="'/admin/categories/edit/' + element.id">

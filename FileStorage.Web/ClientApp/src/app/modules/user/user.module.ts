@@ -19,6 +19,7 @@ import { MoveFileComponent } from './file/move-file/move-file.component';
 import { DownloadFileComponent } from './file/download-file/download-file.component';
 import { UrlService } from 'src/app/service/url.service';
 import { SearchComponent } from './search/search/search.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { SearchComponent } from './search/search/search.component';
         NavFolderComponent,
         MoveFileComponent,
         DownloadFileComponent,
-        SearchComponent
+        SearchComponent,
+        ProfileComponent
     ],
     exports: [
         UserComponent,

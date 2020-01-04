@@ -10,6 +10,8 @@ using FileStorage.BLL.Model;
 using FileStorage.BLL.Service.Infrastructure;
 using FileStorage.DAL.Model;
 using FileStorage.Web.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -79,7 +81,7 @@ namespace FileStorage.Web.Controllers
         }
 
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<object> MakeAdmin([FromBody] ChangeRoleModel model)
         {
             if (!ModelState.IsValid)
@@ -100,7 +102,7 @@ namespace FileStorage.Web.Controllers
         }
 
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<object> MakeUser([FromBody] ChangeRoleModel model)
         {
             if (!ModelState.IsValid)
@@ -134,7 +136,6 @@ namespace FileStorage.Web.Controllers
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            //var now = DateTime.UtcNow;
             var now = DateTime.Now;
             var hours = Convert.ToDouble(_configuration["JwtExpiresHours"]);
             var expires = now.AddHours(hours);

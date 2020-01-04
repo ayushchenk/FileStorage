@@ -101,8 +101,6 @@ namespace FileStorage.Web
                 RequestPath = new PathString("/Files")
             });
 
-            //app.UseDefaultFiles();
-
             app.UseHttpsRedirection();
 
             app.UseRouting();

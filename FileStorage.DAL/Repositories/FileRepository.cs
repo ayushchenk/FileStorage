@@ -13,16 +13,5 @@ namespace FileStorage.DAL.Repositories
         public FileRepository(DbContext context) : base(context)
         {
         }
-
-        //public override File Find(Guid id)
-        //{
-        //    var item = dbSet.AsNoTracking().FirstOrDefault(f => f.Id == id);
-        //    item.Path = $@"Files\{item.UserId}\{item.FileName}";
-        //    if (item != null && item.FolderId != null)
-        //    {
-        //        var folder = context.Set<Folder>().AsNoTracking().FirstOrDefault(f => f.Id == item.FolderId);
-        //        item.Path = folder.Fu
-        //    }
-        //}
     }
 }
