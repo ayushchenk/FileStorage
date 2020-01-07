@@ -14,7 +14,6 @@ namespace FileStorage.BLL.Service.Tests
     [TestFixture()]
     public class CategoryServiceTests
     {
-
         IEntityService<CategoryDTO> service;
         List<CategoryDTO> categories = new List<CategoryDTO>();
 
