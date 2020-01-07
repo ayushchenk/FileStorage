@@ -28,14 +28,14 @@ import { HttpModule } from '@angular/http';
         AppRoutingModule,
         HttpModule
     ],
-    // providers: [
-    //   { provide: ErrorHandler, useClass: LogErrorHandler },
+    providers: [
+      { provide: ErrorHandler, useClass: LogErrorHandler },
     //   {
     //     provide: HTTP_INTERCEPTORS,
     //     useClass: HttpErrorInterceptor,
     //     multi: true,
     //   }
-    // ],
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
