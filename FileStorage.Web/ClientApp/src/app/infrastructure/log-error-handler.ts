@@ -4,4 +4,4 @@ export class LogErrorHandler implements ErrorHandler {
     handleError(error) {
         console.log(error);
     }
-  }
+}

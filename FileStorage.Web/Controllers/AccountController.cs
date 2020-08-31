@@ -6,8 +6,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using FileStorage.BLL.Model;
-using FileStorage.BLL.Service.Infrastructure;
 using FileStorage.DAL.Model;
 using FileStorage.Web.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

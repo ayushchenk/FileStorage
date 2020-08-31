@@ -6,10 +6,15 @@
 
   <ItemGroup>
     <Compile Remove="ClientApp\**" />
+    <Compile Remove="Files\**" />
     <Content Remove="ClientApp\**" />
+    <Content Remove="Files\**" />
     <EmbeddedResource Remove="ClientApp\**" />
+    <EmbeddedResource Remove="Files\**" />
     <None Remove="ClientApp\**" />
+    <None Remove="Files\**" />
     <TypeScriptCompile Remove="ClientApp\**" />
+    <TypeScriptCompile Remove="Files\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Files\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
