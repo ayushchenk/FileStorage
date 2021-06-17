@@ -141,9 +141,9 @@ namespace FileStorage.Web.Controllers
                     return BadRequest();
                 bool move = bool.Parse(moveHeader.First());
                 var file = await fileService.FindAsync(value.Id);
-                var parent = await folderService.FindAsync(value.FolderId ?? Guid.Empty);
                 if (move)
                 {
+                    var parent = await folderService.FindAsync(value.FolderId ?? Guid.Empty);
                     file.FolderId = value.FolderId;
                     ioService.MoveFile(file, parent);
                 }

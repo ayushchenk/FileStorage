@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { FileModel } from '../model/file';
 import { TokenManager } from 'src/app/modules/account/service/token-manager';
 import { Observable } from 'rxjs';
-import { Guid } from 'guid-typescript';
 
 @Injectable()
 export class FileService {
@@ -42,9 +41,6 @@ export class FileService {
     }
 
     put(file: FileModel, move: boolean = false): Observable<HttpResponse<FileModel>> {
-        if(file.folderId == Guid.EMPTY){
-            file.folderId = null;
-        }
         file.file = null;
         var headers = this.tokenManager.getHeaders();
         headers = headers.append("move", move.toString());

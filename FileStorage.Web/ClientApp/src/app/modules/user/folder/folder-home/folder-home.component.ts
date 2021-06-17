@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
 import { FolderService } from 'src/app/service/folder.service';
+import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Guid } from 'guid-typescript';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateFolderComponent } from '../create-folder/create-folder.component';
 import { EditFolderComponent } from '../edit-folder/edit-folder.component';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { saveAs } from '@progress/kendo-file-saver';
 import { MoveFolderComponent } from '../move-folder/move-folder.component';
 import { Folder } from 'src/app/model/folder';
@@ -11,9 +15,11 @@ import { Folder } from 'src/app/model/folder';
 @Component({
     selector: 'folder-home',
     templateUrl: './folder-home.component.html'
+    // styleUrls: ['./folder-home.component.css'],
 })
 export class FolderHomeComponent implements OnInit {
     private displayedColumns = ['folderName', 'actions'];
+    // private currentFolder: Folder = new Folder(null, "", null, null);
     private currentFolder: Folder = new Folder();
     private allFolders: Folder[] = [];
     private folders: Folder[] = [];
@@ -64,10 +70,7 @@ export class FolderHomeComponent implements OnInit {
 
     newFolder() {
         this.dialog.open(CreateFolderComponent, {
-            data: {
-                id : this.currentFolder.id,
-                folders : this.folders.filter(f => f.parentFolderId == this.currentFolder.id)
-            }
+            data: this.currentFolder.id
         }).afterClosed().subscribe((folder) => {
             if (folder != null) {
                 this.allFolders.push(folder);

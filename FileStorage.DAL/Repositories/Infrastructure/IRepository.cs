@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileStorage.DAL.Repositories.Infrastructure
 {
-    public interface IRepository<T> where T :class, IEntity<Guid> , new()
+    public interface IRepository<T> where T : class, IEntity<Guid> , new()
     {
         Guid Add(T item);
         void Update(T item);

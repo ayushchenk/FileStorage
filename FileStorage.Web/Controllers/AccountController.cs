@@ -6,6 +6,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using FileStorage.BLL.Model;
+using FileStorage.BLL.Service.Infrastructure;
 using FileStorage.DAL.Model;
 using FileStorage.Web.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -79,7 +81,7 @@ namespace FileStorage.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<object> MakeAdmin([FromBody] ChangeRoleModel model)
         {
             if (!ModelState.IsValid)
@@ -100,7 +102,7 @@ namespace FileStorage.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<object> MakeUser([FromBody] ChangeRoleModel model)
         {
             if (!ModelState.IsValid)

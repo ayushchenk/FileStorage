@@ -13,7 +13,9 @@ namespace FileStorage.BLL.Service.Infrastructure
 
             CreateMap<Folder, FolderDTO>();
             CreateMap<FolderDTO, Folder>()
-                .ForMember("ParentFolderId", options => options.MapFrom(folder => folder.ParentFolderId == Guid.Empty ? null : folder.ParentFolderId));
+                .ForMember("ParentFolderId", options => options.MapFrom(
+                    folder => folder.ParentFolderId == Guid.Empty ? null : folder.ParentFolderId)
+                );
 
             CreateMap<File, FileDTO>()
                 .ForMember("FirstName", options => options.MapFrom(file => file.User.FirstName))

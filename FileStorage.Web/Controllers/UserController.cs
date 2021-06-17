@@ -28,7 +28,7 @@ namespace FileStorage.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(userManager.Users.ToList().Select(user => new UserDTO(user, userManager.GetRolesAsync(user).Result)));
+            return Ok(userManager.Users.ToList().Select(user => new BLL.Model.UserDTO(user, userManager.GetRolesAsync(user).Result)));
         }
 
         [HttpDelete("{id}")]

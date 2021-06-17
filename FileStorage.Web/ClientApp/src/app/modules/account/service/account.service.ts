@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AccountService {
-    private url = "/account/";
+    private url = "/account";
     private readonly onLoginComplete: LiteEvent<boolean> = new LiteEvent();
     private readonly onRegisterComplete: LiteEvent<boolean> = new LiteEvent();
 
@@ -18,11 +18,11 @@ export class AccountService {
         private httpClient: HttpClient,
     ) { }
 
-    register(model: RegisterModel) : Observable<TokenWrap> {
-        return this.httpClient.post<TokenWrap>(this.url + "register", model, { observe: 'body' });
+    register(model: RegisterModel): Observable<TokenWrap> {
+        return this.httpClient.post<TokenWrap>(this.url + "/register", model, { observe: 'body' });
     }
 
-    login(model: LoginModel) {
-        return this.httpClient.post<TokenWrap>(this.url + "login", model, { observe: 'body' });
+    login(model: LoginModel): Observable<TokenWrap> {
+        return this.httpClient.post<TokenWrap>(this.url + "/login", model, { observe: 'body' });
     }
 }

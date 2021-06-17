@@ -15,20 +15,7 @@ export class UserListComponent implements OnInit {
     constructor(
         private userService: UserService
     ) {
-        this.dataSource.filterPredicate = (data, filter) => {
-            if(data.firstName == null){
-                data.firstName = "";
-            }
-            if(data.lastName == null){
-                data.lastName = "";
-            }
-            filter = filter.trim().toLowerCase();
-            return data.email.toLowerCase().indexOf(filter) !== -1 
-                || data.firstName.toLowerCase().indexOf(filter) !== -1 
-                || data.lastName.toLowerCase().indexOf(filter) !== -1 
-                || (data.isAdmin && filter == "admin")
-                || (!data.isAdmin && filter == "user")
-        }
+        this.dataSource.filterPredicate = this.filterPredicate;
      }
 
     ngOnInit() {
@@ -63,5 +50,20 @@ export class UserListComponent implements OnInit {
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    filterPredicate(data : User, filter: string){
+        if(data.firstName == null){
+            data.firstName = "";
+        }
+        if(data.lastName == null){
+            data.lastName = "";
+        }
+        filter = filter.trim().toLowerCase();
+        return data.email.toLowerCase().indexOf(filter) !== -1 
+            || data.firstName.toLowerCase().indexOf(filter) !== -1 
+            || data.lastName.toLowerCase().indexOf(filter) !== -1 
+            || (data.isAdmin && filter == "admin")
+            || (!data.isAdmin && filter == "user")
     }
 }

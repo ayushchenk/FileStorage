@@ -11,7 +11,7 @@ import { Folder } from 'src/app/model/folder';
     styleUrls: ['./create-folder.component.css'],
 })
 export class CreateFolderComponent implements OnInit {
-    private folder: Folder = new Folder();
+    folder: Folder = new Folder();
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -20,14 +20,10 @@ export class CreateFolderComponent implements OnInit {
         private tokenManager: TokenManager,
     ) { }
 
-    get nameFree(): boolean {
-        return !this.data.folders.map(f => f.folderName).includes(this.folder.folderName);
-    }
-
     ngOnInit() {
         this.folder.userId = this.tokenManager.get().userId;
-        if (this.data.id != Guid.EMPTY) {
-            this.folder.parentFolderId = this.data.id;
+        if (this.data != Guid.EMPTY) {
+            this.folder.parentFolderId = this.data;
         }
     }
 
